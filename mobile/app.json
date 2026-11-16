@@ -74,7 +74,7 @@
       ]
     ],
     "extra": {
-      "serverUrl": "https://paytwin.onrender.com",
+      "serverUrl": "https://paytwin-edg0.onrender.com",
       "router": {
         "asyncRoutes": {
           "web": true

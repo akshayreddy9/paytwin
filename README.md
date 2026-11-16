@@ -22,8 +22,8 @@ paytm/
 
 | What | Where |
 |---|---|
-| Admin panel | `https://paytwin.onrender.com/admin` or the shared Admin Hub (hosted on Render, data in MongoDB Atlas) |
-| Server / API | `https://paytwin.onrender.com` |
+| Admin panel | `https://paytwin-edg0.onrender.com/admin` or the shared Admin Hub (hosted on Render, data in MongoDB Atlas) |
+| Server / API | `https://paytwin-edg0.onrender.com` |
 | Android APK | Built with Expo EAS (see section 5) |
 | Source code | <https://github.com/akshayreddy9/paytwin> |
 
