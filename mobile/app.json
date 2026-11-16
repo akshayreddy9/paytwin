@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "PayTwin",
-    "slug": "paytwin",
+    "slug": "paytm",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,6 +20,13 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+        "android.permission.CAMERA",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
         "android.permission.RECORD_AUDIO",
         "android.permission.MODIFY_AUDIO_SETTINGS",
         "android.permission.FOREGROUND_SERVICE",
@@ -79,7 +86,14 @@
         "asyncRoutes": {
           "web": true
         }
+      },
+      "eas": {
+        "projectId": "489fdd76-0754-4bc7-b3c5-41faba750406"
       }
+    },
+    "owner": "akshayreddy9848",
+    "updates": {
+      "url": "https://u.expo.dev/489fdd76-0754-4bc7-b3c5-41faba750406"
     }
   }
 }
