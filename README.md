@@ -22,7 +22,7 @@ paytm/
 
 | What | Where |
 |---|---|
-| Admin panel | `https://paytwin.onrender.com/admin` (hosted on Render, data in MongoDB Atlas) |
+| Admin panel | `https://paytwin.onrender.com/admin` or the shared Admin Hub (hosted on Render, data in MongoDB Atlas) |
 | Server / API | `https://paytwin.onrender.com` |
 | Android APK | Built with Expo EAS (see section 5) |
 | Source code | <https://github.com/akshayreddy9/paytwin> |
@@ -31,10 +31,12 @@ The APK always talks to the online server. On Render's free plan the server slee
 
 ## 1. Run it locally (about 5 minutes)
 
+PayTwin uses port **4001** (server) and **8082** (Expo), so it can run at the same time as GGPay (4000 / 8081).
+
 **You need:** a Windows laptop with [Node.js](https://nodejs.org) (LTS) and an Android phone on the **same Wi-Fi**.
 
-1. **Start the server:** double-click `START-SERVER.bat`. The admin panel opens at <http://localhost:4000/admin>. Log in with `admin` / `admin123`.
-   The window prints `Phone/LAN: http://192.168.x.x:4000`, the address the phone uses. If Windows Firewall asks, click **Allow access**.
+1. **Start the server:** double-click `START-SERVER.bat`. The admin panel opens at <http://localhost:4001/admin>. Log in with `admin` / `admin123`.
+   The window prints `Phone/LAN: http://192.168.x.x:4001`, the address the phone uses. If Windows Firewall asks, click **Allow access**.
 2. **Start the app:** double-click `START-APP.bat` (first run installs packages).
 3. **On your phone:** install **Expo Go**, open it, and scan the QR code from the `START-APP` window.
 4. **Log in** with a demo number:
@@ -66,6 +68,9 @@ No phone? Double-click `START-PREVIEW.bat` to use the app in the browser inside 
 | **Also** | To Bank & Self A/c, UPI Lite (add / withdraw), QR scanner, My QR, bills, mobile recharge, rewards (scratch cards), offers, refer, notifications, help tickets, app lock |
 
 ## 3. Admin panel (`/admin`)
+
+The same controls are also available in the shared **Admin Hub** (separate project in `../admin-hub`), which manages GGPay, PayTwin and future clones from one login. PayTwin describes its own controls to the hub through `GET /api/admin/schema`.
+
 
 | Page | Control |
 |---|---|

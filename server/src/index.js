@@ -7,7 +7,7 @@ const { Server } = require('socket.io');
 const store = require('./db');
 const { AVATAR_COLORS, CATEGORIES } = require('./seed');
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 const D = () => store.get();
 
 const app = express();
@@ -664,6 +664,37 @@ app.post('/api/admin/login', wrap((req) => {
   audit(a, 'login', 'Signed in to admin panel');
   return { token, admin: { id: a.id, name: a.name, username: a.username, role: a.role } };
 }));
+
+// Describes this app's controls so a shared admin panel (the Admin Hub) can adapt to it.
+app.get('/api/admin/schema', adminRoute(() => ({
+  app: { name: D().settings.appName, kind: 'paytwin', version: 1 },
+  features: {
+    scan: ['Scan QR code', 'Camera QR scanner and My QR'], payContacts: ['Pay Anyone', 'Pay contacts, phone numbers and UPI IDs'],
+    bankTransfer: ['Bank transfer', 'Pay to account number + IFSC'], selfTransfer: ['Self transfer', 'Move money between own accounts'],
+    bills: ['Pay bills', 'Electricity, DTH, broadband…'], recharge: ['Mobile recharge', 'Prepaid plans'], rewards: ['Rewards', 'Scratch cards & cashback'],
+    requests: ['Request money', 'Ask contacts for money'], checkBalance: ['Check balance', 'View bank balance with PIN'], upiLite: ['UPI Lite', 'Small wallet for PIN-less payments'],
+  },
+  homeSections: {
+    recharge: 'Recharge & Bills', offer: 'Exclusive offer card (countdown)', tiles: 'Money tiles + shortcut chips', banners: 'Promo banner carousel',
+    travel: 'Travel & Tickets', gold: 'Gold & Silver', financial: 'Financial Services', freeTools: 'Free Tools', doMore: 'Do More', promoted: 'Promoted', refer: 'Refer & Win',
+  },
+  brandingFields: [
+    { name: 'appVersion', label: 'Version shown in profile' },
+    { name: 'headerPromoTitle', label: 'Home header promo (title)' },
+    { name: 'headerPromoSubtitle', label: 'Home header promo (sub text)' },
+    { name: 'offerTitle', label: 'Exclusive offer title' },
+    { name: 'offerEndsAt', label: 'Offer countdown ends at', type: 'datetime-local' },
+    { name: 'categories', label: 'Payment categories (comma separated)', type: 'list', span2: true },
+  ],
+  userFields: [
+    { name: 'merchantIcon', label: 'Business icon', type: 'select', options: [['', 'Initials'], ['play', 'App store'], ['bus', 'Bus'], ['hotel', 'Hotel / travel'], ['food', 'Food'], ['fuel', 'Fuel'], ['health', 'Health']] },
+    { name: 'goldCoins', label: 'Gold Coins', type: 'number' },
+    { name: 'upiLite', label: 'UPI Lite balance (₹)', type: 'number' },
+  ],
+  txnCategories: true,
+  adCard: false,
+  banners: { emojiLabel: 'Big highlight (e.g. 7.99%)', subtitleLabel: 'Small text above the highlight' },
+})));
 
 app.get('/api/admin/me', adminRoute((req, a) => ({ admin: { id: a.id, name: a.name, username: a.username, role: a.role } })));
 

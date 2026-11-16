@@ -41,7 +41,7 @@ export default function Server() {
       <Header title="Server address" />
       <ScrollView contentContainerStyle={{ padding: 20 }} keyboardShouldPersistTaps="handled">
         <Text style={{ color: C.muted, lineHeight: 20 }}>
-          Enter the address shown when you start the PayTwin server on your laptop (the "Phone/LAN" line), for example http://192.168.1.8:4000
+          Enter the address shown when you start the PayTwin server on your laptop (the "Phone/LAN" line), for example http://192.168.1.8:4001
         </Text>
         <Text style={s.label}>Server URL</Text>
         <TextInput style={s.input} value={url} onChangeText={setUrl} autoCapitalize="none" autoCorrect={false} keyboardType="url" />

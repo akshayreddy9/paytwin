@@ -6,9 +6,9 @@ if not exist node_modules (
   call npm install
 )
 echo.
-echo Admin panel will open at http://localhost:4000/admin  (login: admin / admin123)
+echo Admin panel will open at http://localhost:4001/admin  (login: admin / admin123)
 echo Keep this window open while using the app.
 echo.
-start "" http://localhost:4000/admin
+start "" http://localhost:4001/admin
 node src\index.js
 pause

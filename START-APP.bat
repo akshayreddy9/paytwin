@@ -11,6 +11,6 @@ echo.
 echo 1. Install "Expo Go" from the Play Store on your Android phone.
 echo 2. Connect the phone to the SAME Wi-Fi as this laptop.
 echo 3. Scan the QR code below (it also opens in your browser).
-call node scripts\show-qr.js 8081
-call npx expo start --lan --port 8081
+call node scripts\show-qr.js 8082
+call npx expo start --lan --port 8082
 pause
