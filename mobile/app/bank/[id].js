@@ -58,7 +58,7 @@ export default function BankDetail() {
 
   return (
     <View style={{ flex: 1, backgroundColor: C.page }}>
-      <LinearGradient colors={['#00B5F0', '#0A6BC2', '#0B3D86']} style={{ paddingTop: insets.top, borderBottomLeftRadius: z(28), borderBottomRightRadius: z(28), paddingBottom: z(26) }}>
+      <LinearGradient colors={['#00B5F0', '#0A86D8', '#0B5CB5']} style={{ paddingTop: insets.top, borderBottomLeftRadius: z(28), borderBottomRightRadius: z(28), paddingBottom: z(26) }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: z(14), paddingTop: z(10) }}>
           <Pressable hitSlop={10} onPress={() => router.back()}><Sym name="arrow_back" size={28} color="#fff" /></Pressable>
           <Pressable hitSlop={10} onPress={() => setMenu(true)}><Sym name="more_vert" size={28} color="#fff" /></Pressable>

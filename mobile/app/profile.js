@@ -52,12 +52,12 @@ export default function Profile() {
   };
 
   const SETTINGS = [
-    { icon: 'family_restroom', title: 'Pocket Money', badge: 'New', sub: 'Give your dependents UPI access with UPI Circle — fully under your control', go: () => toast('Pocket Money is not part of this demo') },
+    { icon: 'phonelink_ring', title: 'Pocket Money', badge: 'New', sub: 'Give your dependents UPI access with UPI Circle — fully under your control', go: () => toast('Pocket Money is not part of this demo') },
     { icon: 'settings', title: 'UPI & Payment Settings', sub: 'UPI PIN, Bank Accounts & more', go: () => go('/upi-settings') },
     { icon: 'autorenew', title: 'Automatic Payments', sub: 'Manage all your UPI Automatic Payments', go: () => toast('No automatic payments set up') },
-    { icon: 'shopping_bag', title: 'Orders & Bookings', sub: 'Payments, Recharge, Travel & Others', go: () => go('/history') },
+    { icon: 'package_2', title: 'Orders & Bookings', sub: 'Payments, Recharge, Travel & Others', go: () => go('/history') },
     { icon: 'person', title: 'Profile', sub: 'Privacy, Notification & Language', go: () => go('/settings') },
-    { icon: 'group_add', title: 'Refer & Win', sub: `Assured ₹${settings?.referralBonus ?? 400}`, go: () => go('/refer') },
+    { icon: 'groups', title: 'Refer & Win', sub: `Assured ₹${settings?.referralBonus ?? 400}`, go: () => go('/refer') },
     { icon: 'support_agent', title: 'Help & Support', sub: 'Customer Support, Your Queries & FAQs', go: () => go('/help') },
     { icon: 'send_money', title: 'MyUPI', sub: 'Help for Payments, Mandates & Services', go: () => go('/bank-accounts') },
     { icon: 'contrast', title: 'Appearance', sub: 'Experience Dark Mode (Beta) on select pages, stay tuned for more!', go: () => toast('Dark mode is coming soon') },

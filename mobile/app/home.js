@@ -16,7 +16,7 @@ function Cell({ icon, label, onPress, badge, iconColor = C.icon, width = '25%' }
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [{ width, alignItems: 'center', paddingVertical: z(8) }, pressed && { opacity: 0.6 }]}>
       <View style={{ height: z(40), justifyContent: 'center' }}>
-        <Sym name={icon} size={32} color={iconColor} />
+        <Sym name={icon} size={32} color={iconColor} duo={iconColor === C.icon ? true : iconColor + "33"} />
         {!!badge && (
           <View style={{ position: 'absolute', top: -z(10), alignSelf: 'center', backgroundColor: C.badge, borderRadius: z(4), paddingHorizontal: z(4), paddingVertical: z(1) }}>
             <Text style={{ fontSize: 10, color: '#3A2E00', fontWeight: '500' }} numberOfLines={1}>{badge}</Text>
@@ -160,7 +160,7 @@ function FreeToolCard({ bg, title, onPress, children }) {
 function Chip({ icon, label, onPress, emoji }) {
   return (
     <Pressable onPress={onPress} style={{ flexDirection: 'row', alignItems: 'center', gap: z(8), backgroundColor: '#fff', borderRadius: z(24), height: z(46), paddingHorizontal: z(16), marginRight: z(10) }}>
-      {emoji ? <Text style={{ fontSize: 18 }}>{emoji}</Text> : <Sym name={icon} size={22} color={C.icon} />}
+      {emoji ? <Text style={{ fontSize: 18 }}>{emoji}</Text> : <Sym name={icon} size={22} color={C.icon} duo />}
       <Text style={{ fontSize: 16, color: '#2B2B2B' }}>{label}</Text>
     </Pressable>
   );
@@ -201,7 +201,7 @@ export default function Home() {
     { icon: 'mobile_charge', label: 'Mobile\nRecharge', go: () => router.push('/recharge') },
     { icon: 'credit_card', label: 'Credit Card\nBill', go: () => router.push({ pathname: '/bills', params: { category: 'creditcard' } }) },
     { icon: 'lightbulb', label: 'Electricity\nBill', badge: 'Get ₹20', go: () => router.push({ pathname: '/bills', params: { category: 'electricity' } }) },
-    { icon: 'toll', label: 'FASTag\nRecharge', go: () => router.push({ pathname: '/bills', params: { category: 'fastag' } }) },
+    { icon: 'featured_video', label: 'FASTag\nRecharge', go: () => router.push({ pathname: '/bills', params: { category: 'fastag' } }) },
     { icon: 'satellite_alt', label: 'DTH\nRecharge', go: () => router.push({ pathname: '/bills', params: { category: 'dth' } }) },
     { icon: 'router', label: 'Broadband\nBill', go: () => router.push({ pathname: '/bills', params: { category: 'broadband' } }) },
     { icon: 'water_drop', label: 'Water\nBill', go: () => router.push({ pathname: '/bills', params: { category: 'water' } }) },
