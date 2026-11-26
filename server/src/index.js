@@ -83,6 +83,7 @@ function clientSettings() {
   const s = D().settings;
   return {
     appIcon: s.appIcon || '',
+    splashLogo: s.splashLogo || '', splashBg: s.splashBg || '#FFFFFF', splashText: s.splashText || '',
     adCard: { ...DEFAULT_AD, ...(s.adCard || {}) },
     appName: s.appName, maintenanceMode: s.maintenanceMode, maintenanceMessage: s.maintenanceMessage,
     perTxLimit: s.perTxLimit, dailyLimit: s.dailyLimit, referralBonus: s.referralBonus, announcement: s.announcement,
@@ -679,6 +680,9 @@ app.get('/api/admin/schema', adminRoute(() => ({
     travel: 'Travel & Tickets', gold: 'Gold & Silver', financial: 'Financial Services', freeTools: 'Free Tools', doMore: 'Do More', promoted: 'Promoted', refer: 'Refer & Win',
   },
   brandingFields: [
+    { name: 'splashLogo', label: 'Splash screen logo (shown when the app opens; empty = normal splash)', type: 'image', max: 512, span2: true },
+    { name: 'splashBg', label: 'Splash background colour', type: 'color' },
+    { name: 'splashText', label: 'Splash text under the logo (empty = app name)' },
     { name: 'appVersion', label: 'Version shown in profile' },
     { name: 'headerPromoTitle', label: 'Home header promo (title)' },
     { name: 'headerPromoSubtitle', label: 'Home header promo (sub text)' },
@@ -1042,11 +1046,11 @@ app.delete('/api/admin/c/:coll/:id', adminRoute((req, admin) => {
 }));
 
 // ----- settings -----
-app.get('/api/admin/settings', adminRoute(() => ({ settings: { ...D().settings, adCard: { ...DEFAULT_AD, ...(D().settings.adCard || {}) }, appIcon: D().settings.appIcon || '' } })));
+app.get('/api/admin/settings', adminRoute(() => ({ settings: { ...D().settings, adCard: { ...DEFAULT_AD, ...(D().settings.adCard || {}) }, appIcon: D().settings.appIcon || '', splashBg: D().settings.splashBg || '#FFFFFF' } })));
 app.put('/api/admin/settings', adminRoute((req, admin) => {
   const s = D().settings;
   const b = req.body;
-  ['appName', 'maintenanceMessage', 'otpCode', 'announcement', 'appIcon', 'appVersion', 'headerPromoTitle', 'headerPromoSubtitle', 'offerTitle'].forEach((k) => { if (b[k] !== undefined) s[k] = String(b[k]); });
+  ['appName', 'maintenanceMessage', 'otpCode', 'announcement', 'appIcon', 'appVersion', 'headerPromoTitle', 'headerPromoSubtitle', 'offerTitle', 'splashLogo', 'splashBg', 'splashText'].forEach((k) => { if (b[k] !== undefined) s[k] = String(b[k]); });
   if (b.adCard) s.adCard = { ...DEFAULT_AD, ...(s.adCard || {}), ...b.adCard, active: b.adCard.active !== undefined ? !!b.adCard.active : (s.adCard || DEFAULT_AD).active };
   ['perTxLimit', 'dailyLimit', 'newAccountBalance', 'referralBonus', 'offerEndsAt'].forEach((k) => { if (b[k] !== undefined) s[k] = Number(b[k]); });
   if (Array.isArray(b.categories)) s.categories = b.categories.map((c) => String(c).trim()).filter(Boolean).slice(0, 30);

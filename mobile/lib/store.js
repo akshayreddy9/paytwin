@@ -7,11 +7,17 @@ import { api, get, getServerUrl, getToken, initApi, onApiError, post, setToken }
 const AppCtx = createContext(null);
 const LOCK_KEY = 'pn_app_lock';
 
+// Last admin settings seen, so the splash shows the admin's logo before the server answers.
+const SETTINGS_CACHE = 'app_settings_cache';
+
 export function AppProvider({ children }) {
   const [booted, setBooted] = useState(false);
   const [user, setUser] = useState(null);
   const [accounts, setAccounts] = useState([]);
   const [settings, setSettings] = useState(null);
+  const [settingsReady, setSettingsReady] = useState(false);
+  // Keep a copy of the admin settings on the phone (splash logo, colours, names).
+  useEffect(() => { if (settings) AsyncStorage.setItem(SETTINGS_CACHE, JSON.stringify(settings)).catch(() => {}); }, [settings]);
   const [home, setHome] = useState(null);
   const [blocked, setBlocked] = useState(null);
   const [banner, setBanner] = useState(null);
@@ -81,6 +87,8 @@ export function AppProvider({ children }) {
       await initApi();
       const lock = (await AsyncStorage.getItem(LOCK_KEY)) === '1';
       setLockEnabled(lock);
+      try { const c = JSON.parse((await AsyncStorage.getItem(SETTINGS_CACHE)) || 'null'); if (c) setSettings((s) => s || c); } catch {}
+      setSettingsReady(true);
       try {
         const cfg = await get('/config');
         setSettings(cfg.settings);
@@ -146,7 +154,7 @@ export function AppProvider({ children }) {
   }, []);
 
   const value = {
-    booted, user, accounts, settings, home, blocked, banner, snack, connected, lockEnabled, locked,
+    booted, settingsReady, user, accounts, settings, home, blocked, banner, snack, connected, lockEnabled, locked,
     setLocked, setAppLock, setBanner, setSettings, applyMe, refreshMe, refreshHome, signIn, signOut,
     showBanner, toast, subscribe, requestPin, pinRequest, api,
   };

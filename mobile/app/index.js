@@ -6,6 +6,7 @@ import { Sym } from '../components/ui';
 import { Wordmark } from '../components/Logo';
 import { useApp } from '../lib/store';
 import { z } from '../lib/theme';
+import { AdminSplash, SplashBlank } from '../components/AdminSplash';
 
 function Badge({ icon, label, sub }) {
   return (
@@ -21,7 +22,7 @@ function Badge({ icon, label, sub }) {
 
 // Splash: wordmark with the tagline, then route to the right place.
 export default function Splash() {
-  const { booted, user, accounts } = useApp();
+  const { booted, user, accounts, settings, settingsReady } = useApp();
   const fade = useRef(new Animated.Value(0)).current;
 
   useEffect(() => { Animated.timing(fade, { toValue: 1, duration: 400, useNativeDriver: true }).start(); }, [fade]);
@@ -36,6 +37,10 @@ export default function Splash() {
     }, 1100);
     return () => clearTimeout(t);
   }, [booted, user, accounts.length]);
+
+  // Admin panel splash (logo / colour / text) wins over the built-in design.
+  if (!settingsReady) return <SplashBlank settings={settings} />;
+  if (settings?.splashLogo) return <AdminSplash settings={settings} />;
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
